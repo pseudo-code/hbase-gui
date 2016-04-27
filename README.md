@@ -1,7 +1,7 @@
 # Overview
 This project is a GUI client for hbase database that built on java Swing.
 
-# Features and limit:
+# Features and limit
 * Support view hbase rows and cells by pagination.
 * Support filter rows by RegEx.
 * Support view/create/delete tables, view/create/delete rows, view/add/update cells.
@@ -9,7 +9,7 @@ This project is a GUI client for hbase database that built on java Swing.
  
 # Requirtments
 * JDK 1.8 or a higher version
-* Maven is sugested, or you can dowanload apache hbase-client-1.2.0.jar and add to the java build path.
+* Maven is sugested, however you can dowanload apache hbase-client-1.2.0.jar youself and add it to the java build path.
 
 
 # Run
