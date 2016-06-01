@@ -8,8 +8,10 @@ This project is a GUI client for hbase database that built on java Swing.
 * Not support view hbase data versions.
  
 # Requirtments
+## Run
 * JDK 1.8 or a higher version
-* Maven is sugested, however you can dowanload apache hbase-client-1.2.0.jar youself and add it to the java build path.
+## Compile
+* Maven
 
 
 # Run
