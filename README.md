@@ -8,9 +8,11 @@ This project is a GUI client for hbase database that built on java Swing.
 * Not support view hbase data versions.
  
 # Requirtments
-## Run
+
+## For Run
 * JDK 1.8 or a higher version
-## Compile
+
+## For Compile
 * Maven
 
 
