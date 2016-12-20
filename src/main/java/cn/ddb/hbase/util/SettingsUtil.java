@@ -14,6 +14,7 @@ public class SettingsUtil {
 	public static final String CELL_LIMIT				= "cell_limit";
 	public static final String ZOOKEEPER_QUORUM			= "zookeeper_quorum";
 	public static final String CLIENT_PORT				= "client_port";
+	public static final String ZNODE_PARENT				= "znode_parent";
 	
 	public static final int DEFAULT_ROW_LIMIT			= 1000;
 	public static final int DEFAULT_CELL_LIMIT			= 1000;
@@ -75,6 +76,12 @@ public class SettingsUtil {
 		checkLoad();
 		return properties.getProperty(CLIENT_PORT);
 	}
+
+	public static String getZnodeParent() {
+		checkLoad();
+		return properties.getProperty(ZNODE_PARENT);
+	}
+
 	
 	private SettingsUtil() {} // No instant.
 	

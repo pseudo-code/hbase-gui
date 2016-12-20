@@ -49,7 +49,8 @@ public class Context {
 	
 	private static final String STR_ZOOKEEPER_QUORUM 		= "hbase.zookeeper.quorum";
 	private static final String STR_ZOOKEEPER_CLIENT_PORT	= "hbase.zookeeper.property.clientPort";
-	
+	private static final String STR_ZOOKEEPER_ZNODE_PARENT  = "zookeeper.znode.parent";
+
 	private Configuration configuration;
 	
 	private Connection connection;
@@ -62,21 +63,27 @@ public class Context {
 	}
 	
 	/** 连接到zookeeper */
-	public void initConnection(String zookeeperAddr, String port) throws IOException {
+	public void initConnection(String zookeeperAddr, String port, String znodeParent) throws IOException {
 		if(zookeeperAddr == null || port == null){
 			throw new NullPointerException("zookeeper地址和端口不能为空");
 		}
 		
 		zookeeperAddr	= zookeeperAddr.replace(" ", "");
 		port			= port.replace(" ", "");
-		
+        znodeParent     = znodeParent.replace(" ", "");
+
 		if(zookeeperAddr.length() == 0 || port.length() == 0){
 			throw new NullPointerException("zookeeper地址和端口不能为空");
 		}
+
+        if(znodeParent.trim().length() == 0){
+            znodeParent = "/hbase";
+        }
 		
 		configuration.set(STR_ZOOKEEPER_QUORUM, zookeeperAddr);
 		configuration.set(STR_ZOOKEEPER_CLIENT_PORT, port);
-		
+        configuration.set(STR_ZOOKEEPER_ZNODE_PARENT, znodeParent);
+
 		connection = ConnectionFactory.createConnection(configuration);
 		isConnected = true;
 	}

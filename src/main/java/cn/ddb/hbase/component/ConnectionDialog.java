@@ -26,13 +26,15 @@ public class ConnectionDialog extends JDialog implements MouseListener {
 	
 	@FunctionalInterface
 	public static interface OkButtonListener {
-		public void onConfigConfirm(String zookeeper, String port);
+		public void onConfigConfirm(String zookeeper, String port, String znodeParent);
 	}
 	
 	private JLabel jl1;
 	private JLabel jl2;
+	private JLabel jl3;
 	private JTextField address;
 	private JTextField port;
+	private JTextField znodeParent;
 	private JButton ok;
 	private JButton cancel;
 	
@@ -46,10 +48,12 @@ public class ConnectionDialog extends JDialog implements MouseListener {
 		jl1.setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 10));
 		jl2 = new JLabel("Port :");
 		jl2.setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 10));
+		jl3 = new JLabel("ZNode parent :");
+		jl3.setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 10));
 		
 		address = new JTextField(SettingsUtil.getZookeeperQuarum(), 20);
 		port = new JTextField(SettingsUtil.getClientPort(), 20);
-		
+		znodeParent = new JTextField(SettingsUtil.getZnodeParent(), 20);
 		ok = new JButton("ok");
 		ok.setName("ok");
 		ok.addMouseListener(this);
@@ -62,13 +66,14 @@ public class ConnectionDialog extends JDialog implements MouseListener {
 		GroupLayout layout = new GroupLayout(jpanel);
 		jpanel.setLayout(layout);
 		layout.setHorizontalGroup(layout.createSequentialGroup()
-				.addGroup(layout.createParallelGroup(Alignment.LEADING).addComponent(jl1).addComponent(jl2).addComponent(ok))
-				.addGroup(layout.createParallelGroup(Alignment.LEADING).addComponent(address).addComponent(port).addComponent(cancel)));
+				.addGroup(layout.createParallelGroup(Alignment.LEADING).addComponent(jl1).addComponent(jl2).addComponent(jl3).addComponent(ok))
+				.addGroup(layout.createParallelGroup(Alignment.LEADING).addComponent(address).addComponent(port).addComponent(znodeParent).addComponent(cancel)));
 		
 		layout.setVerticalGroup(layout.createSequentialGroup()
 				.addGroup(layout.createParallelGroup(Alignment.BASELINE).addComponent(jl1).addComponent(address))
 				.addGroup(layout.createParallelGroup(Alignment.BASELINE).addComponent(jl2).addComponent(port))
-				.addGap(10)
+                .addGroup(layout.createParallelGroup(Alignment.BASELINE).addComponent(jl3).addComponent(znodeParent))
+                .addGap(10)
 				.addGroup(layout.createParallelGroup(Alignment.BASELINE).addComponent(ok).addComponent(cancel)));
 		
 		jpanel.setSize(new Dimension(400, 200));
@@ -99,7 +104,7 @@ public class ConnectionDialog extends JDialog implements MouseListener {
 		switch(((JComponent)e.getSource()).getName()){
 		case "ok":
 			if(okButtonListener != null){
-				okButtonListener.onConfigConfirm(address.getText(), port.getText());
+				okButtonListener.onConfigConfirm(address.getText(), port.getText(), znodeParent.getText());
 			}
 			super.setVisible(false);
 			break;
