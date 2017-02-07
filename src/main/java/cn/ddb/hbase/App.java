@@ -195,9 +195,9 @@ public class App {
 			}
 		});
 		
-		connectionDialog.setOkButtonListener((zookeeper, port)->{
+		connectionDialog.setOkButtonListener((zookeeper, port, znodeParent)->{
 			try {
-				context.initConnection(zookeeper, port);
+				context.initConnection(zookeeper, port, znodeParent);
 			} catch (Exception e) {
 				e.printStackTrace();
 				JOptionPane.showMessageDialog(mainFrame, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
